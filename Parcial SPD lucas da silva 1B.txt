@@ -1,0 +1,207 @@
+// lucas da silva parcial domicilial 1ro B
+// se da valor a las variables
+int PISO = 0;
+#define SUBIR 3
+#define PARAR 4
+#define BAJAR 5
+#define LEDROJA 13
+#define LEDVERDE 12
+#define A 8
+#define B 9
+#define C A1
+#define D A2
+#define E A3
+#define F 7
+#define G 6
+
+void setup()
+{
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  digitalWrite(3,HIGH);
+  digitalWrite(4,HIGH);
+  digitalWrite(5,HIGH);
+  if (digitalRead(SUBIR)==LOW)
+    /*al usar el boton de subir se activa
+     el montacarga y dependiendo el piso arranca 
+     de un piso u otro*/
+  {
+   switch(PISO){
+          case 0:
+     encender(12);
+     mostrar_0();
+     delay(3000);
+     apagar_scren();
+      mostrar_1();
+     PISO++;
+     delay(3000);
+     apagar_scren();
+     mostrar_2();
+     PISO++;
+     delay(3000);
+     apagar_scren();
+     mostrar_3();
+     PISO++;
+     delay(3000);
+     apagar_scren();
+     apagar(12);
+                break;
+           case 1:
+     encender(12);
+     mostrar_1();
+     delay(3000);
+     apagar_scren();
+     mostrar_2();
+     PISO++;
+     delay(3000);
+     apagar_scren();
+     mostrar_3();
+     PISO++;
+     delay(3000);
+     apagar_scren();
+     apagar(12);
+               break;
+           case 2:
+     encender(12);
+     mostrar_2();
+     delay(3000);
+     apagar_scren();
+     mostrar_3();
+     PISO++;
+     apagar(12);
+                break;
+     	  case 3:
+     encender(13);
+     mostrar_3();
+     
+     break;
+    
+    }
+  }
+   if (digitalRead(BAJAR)==LOW)
+  {
+     /*al usar el boton de bajar se activa
+     el montacarga y dependiendo el piso arranca 
+     de un piso u otro*/
+   switch(PISO){
+          case 0:
+     encender(13);
+     mostrar_0();
+                break;
+           case 1:
+     encender(12);
+     mostrar_1();
+     delay(3000);
+     apagar_scren();
+     mostrar_0();
+     PISO--;
+     apagar(12);
+               break;
+           case 2:
+     encender(12);
+     mostrar_2();
+     delay(3000);
+     apagar_scren();
+     mostrar_1();
+     PISO--;
+     delay(3000);
+     apagar_scren();
+     mostrar_0();
+     PISO--;
+     apagar(12);
+                break;
+     	  case 3:
+     encender(12);
+     mostrar_3();
+     delay(3000);
+     apagar_scren();
+     mostrar_2();
+     PISO--;
+     delay(3000);
+     apagar_scren();
+     mostrar_1();
+     PISO--;
+     delay(3000);
+     apagar_scren();
+     mostrar_0();
+     apagar(12);
+     break;
+    
+    }
+  }
+}
+void encender(int led)
+{
+  /*enciende la led*/
+  digitalWrite(led,HIGH);
+}
+void apagar(int led)
+{
+  /*apaga la led*/
+  digitalWrite(led,LOW);
+}
+void mostrar_3()
+{
+  /*muestra el 3 en el 7 segmentos*/
+    digitalWrite(A,HIGH);
+    digitalWrite(B,HIGH);
+    digitalWrite(C,HIGH);
+    digitalWrite(D,HIGH);
+    digitalWrite(E,LOW);
+    digitalWrite(F,LOW);
+    digitalWrite(G,HIGH);
+}
+void mostrar_2()
+{
+  /*muestra el 2 en el 7 segmentos*/
+    digitalWrite(A,HIGH);
+    digitalWrite(B,HIGH);
+    digitalWrite(C,LOW);
+    digitalWrite(D,HIGH);
+    digitalWrite(E,HIGH);
+    digitalWrite(F,LOW);
+    digitalWrite(G,HIGH);
+}
+void mostrar_1()
+{
+  /*muestra el 1 en el 7 segmentos*/
+    digitalWrite(A,LOW);
+    digitalWrite(B,HIGH);
+    digitalWrite(C,HIGH);
+    digitalWrite(D,LOW);
+    digitalWrite(E,LOW);
+    digitalWrite(F,LOW);
+    digitalWrite(G,LOW);
+}
+void mostrar_0()
+{
+  /*muestra el 0 en el 7 segmentos*/
+    digitalWrite(A,HIGH);
+    digitalWrite(B,HIGH);
+    digitalWrite(C,HIGH);
+    digitalWrite(D,HIGH);
+    digitalWrite(E,HIGH);
+    digitalWrite(F,HIGH);
+    digitalWrite(G,LOW);
+}
+void apagar_scren()
+{
+  /*apaga el 7 segmentos*/
+  apagar(A);
+  apagar(B);
+  apagar(C);
+  apagar(D);
+  apagar(E);
+  apagar(F);
+  apagar(G);
+}
